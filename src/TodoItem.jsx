@@ -8,7 +8,7 @@ export default function TodoItem({ todo, onToggle, onRemove }) {
         alignItems: "center",
         margin: "0.25rem 0",
         padding: "0.5rem",
-        background: "pink",
+        background: "pink", // kast pink
         borderRadius: "5px",
         boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
         transition: "all 0.3s",

@@ -22,8 +22,8 @@ export default function App() {
   const toggleTodo = (index) => {
     setTodos(
       todos.map((todo, i) =>
-        i === index ? { ...todo, done: !todo.done } : todo
-      )
+        i === index ? { ...todo, done: !todo.done } : todo,
+      ),
     );
   };
 
@@ -68,6 +68,9 @@ export default function App() {
             type="text"
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") addTodo();
+            }}
             placeholder="Lisa uus todo"
             style={{ flex: 1, padding: "0.5rem", fontSize: "1rem" }}
           />
