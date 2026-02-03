@@ -40,18 +40,26 @@ export default function App() {
   return (
     <div
       style={{
-        height: "100vh",            // täis kõrgus
-        width: "100vw",             // täis laius
+        height: "100vh",
+        width: "100vw",
         display: "flex",
-        flexDirection: "column",
-        fontFamily: "Arial, sans-serif",
-        background: "#f5f5f5",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        background: "#a8ceef",
+        padding: "2rem 1rem",
         boxSizing: "border-box",
-        padding: "1rem",
+        fontFamily: "Arial, sans-serif",
       }}
     >
-      {/* Ülemine osa: pealkiri, input ja filter */}
-      <div style={{ flex: "0 0 auto" }}>
+      {/* Sisemine kast – maks 400px, keskel */}
+      <div
+        style={{
+          width: "90%",
+          maxWidth: "400px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <h1 style={{ textAlign: "center", marginBottom: "1rem" }}>Todo App</h1>
 
         {/* Input ja Lisa nupp */}
@@ -65,14 +73,25 @@ export default function App() {
           />
           <button
             onClick={addTodo}
-            style={{ marginLeft: "0.5rem", padding: "0.5rem 1rem", fontSize: "1rem" }}
+            style={{
+              marginLeft: "0.5rem",
+              padding: "0.5rem 1rem",
+              fontSize: "1rem",
+            }}
           >
             Lisa
           </button>
         </div>
 
         {/* Filter */}
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: "1rem", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "1rem",
+            flexWrap: "wrap",
+          }}
+        >
           {["All", "Active", "Done"].map((f) => (
             <button
               key={f}
@@ -80,7 +99,7 @@ export default function App() {
               style={{
                 margin: "0.25rem",
                 padding: "0.3rem 0.6rem",
-                background: filter === f ? "#007bff" : "#eee",
+                background: filter === f ? "#007bff" : "pink",
                 color: filter === f ? "#fff" : "#333",
                 border: "none",
                 borderRadius: "5px",
@@ -91,20 +110,26 @@ export default function App() {
             </button>
           ))}
         </div>
-      </div>
 
-      {/* Todo list – venib kogu ülejäänud kõrguse */}
-      <div style={{ flex: "1 1 auto", overflowY: "auto" }}>
-        <ul style={{ listStyle: "none", padding: 0, margin: 0, width: "100%" }}>
-          {filteredTodos.map((todo, index) => (
-            <TodoItem
-              key={index}
-              todo={todo}
-              onToggle={() => toggleTodo(index)}
-              onRemove={() => removeTodo(index)}
-            />
-          ))}
-        </ul>
+        {/* Todo list – scrollib vajadusel */}
+        <div
+          style={{
+            flex: 1,
+            overflowY: "auto",
+            maxHeight: "calc(100vh - 200px)", // et list ei läheks ekraanist välja
+          }}
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {filteredTodos.map((todo, index) => (
+              <TodoItem
+                key={index}
+                todo={todo}
+                onToggle={() => toggleTodo(index)}
+                onRemove={() => removeTodo(index)}
+              />
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
